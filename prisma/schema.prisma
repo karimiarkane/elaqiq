@@ -17,7 +17,7 @@ model Employee {
   id        Int      @id @default(autoincrement())
   lastName      String
   firstName      String
-  age Int
+  age   String
   contact String
   workstation  Workstation
   createdAt DateTime @default(now())
