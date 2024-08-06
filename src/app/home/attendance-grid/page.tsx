@@ -1,8 +1,24 @@
+import AttendanceGrid from '@/app/components/GridAttendance';
+import prisma from '@/lib/db';
 import React from 'react'
+export const dynamic = 'force-dynamic'
 
-const page = () => {
+
+const page = async () => {
+  const responsea = await prisma.attendance.findMany({ 
+  });
+  // setAttendanceData(responsea);
+  console.log("attendance data" , responsea)
+
+
+// Fetch employees data
+  const responsep = await prisma.employee.findMany({});
+  // setEmployees(responsep);
+
   return (
-    <div>hello from attendance grid</div>
+  
+<AttendanceGrid attendance={responsea} employees={responsep} />
+
   )
 }
 

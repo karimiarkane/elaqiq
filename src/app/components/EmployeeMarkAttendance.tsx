@@ -1,20 +1,29 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {  faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import AddEmployee from "./AddEmployee";
 import DateInputComponent from "./DateInputComponent";
 import { Button } from "@nextui-org/react";
-import { faBullseye } from "@fortawesome/free-solid-svg-icons/faBullseye";
+import {DateValue, parseDate, getLocalTimeZone} from "@internationalized/date";
 
 
 const EmployeeMarkAttendance = ({ data }: { data: any }) => {
+
+
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredEmployees, setFilteredEmployees] = useState(data);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
+
+
+  const [date, setDate] = useState(parseDate(new Date().toISOString().split('T')[0]));
+  
+
+
+  const [presenceLoading , setPresenceLoading] =  useState(false)
+  const [absenceLoading , setAbsenceLoading] =  useState(false)
 
   const totalPages = Math.ceil(data.length / itemsPerPage);
  
@@ -36,22 +45,34 @@ const router = useRouter()
     setCurrentPage(1); // Reset to the first page after filtering
   }, [searchTerm, data]);
   
+useEffect(()=>{
+  setPresenceLoading(false)
+  setAbsenceLoading(false)
+  setDate(parseDate(new Date().toISOString().split('T')[0]))
+} , [])
+
   const lastItemIndex = currentPage * itemsPerPage;
   const firstItemIndex = lastItemIndex - itemsPerPage;
   const currentItems = filteredEmployees.slice(firstItemIndex, lastItemIndex);
 
-  const hundleDeliteClick = async (id: any) => {
-    let confirmDelete = window.confirm(
-      "tu veux vraiment supprimer ce employe ?"
-    );
-    if (confirmDelete) {
+  const markAttendance = async (id , status) => {
+    console.log("new date()",new Date().toISOString())
+    console.log("date" , date)
+   if (status === "present"){
+    setPresenceLoading(true)}else{
+    setAbsenceLoading(true)}
+
       try {
-        const res = await fetch(`/api/employe/${id}`, {
-          method: "DELETE",
+        const res = await fetch(`/api/attendance/`,{
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id, date, status }),
         });
         const resback = await res.json();
+        setPresenceLoading(false)
+        setAbsenceLoading(false)
         if (resback.status === 200){
-window.alert("employe supprimé")
+window.alert("attendance effectué")
 router.refresh()
         }else{
             window.alert("Erreur lors de la suppression de l'employe")
@@ -60,7 +81,7 @@ router.refresh()
         console.log("error deleting user : ", err);
       }
     }
-  };
+  
 
   return (
     <div className="max-w-screen-xl mx-auto px-4 md:px-8 py-10 ">
@@ -83,9 +104,7 @@ router.refresh()
         </form>
         </div>
 
-        <div className="mt-3 md:mt-0">
-          <AddEmployee />
-        </div>
+      
       </div>
       <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
         <table className="w-full table-auto text-sm text-left">
@@ -106,18 +125,17 @@ router.refresh()
                 <td className="px-6 py-4 whitespace-nowrap">
                   {item.workstation}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap"><DateInputComponent/>  </td>
+                <td className="px-6 py-4 whitespace-nowrap"><DateInputComponent  date={date} setDate={setDate}  />  </td>
 
                 <td className="px-6 py-4 whitespace-nowrap   flex  justify-evenly">
               
-                  <Button color="primary" isLoading={false} >
+                  <Button color="primary" isLoading={presenceLoading}  onClick={()=>markAttendance(item.id , "present" )}>
                                  presence
                                  </Button>
                   
-                                 <Button color="danger" isLoading={false} >
+                                 <Button color="danger" isLoading={absenceLoading} onClick={()=>markAttendance(item.id , "absent" )}>
                                  absence
-                                 </Button>
-              
+                                 </Button>  
                 </td>
                 
 
@@ -132,10 +150,7 @@ router.refresh()
 
       <div className="max-w-screen-xl mx-auto mt-12 px-4 text-gray-600 md:px-8">
         <div className="hidden  text-sm md:flex justify-end">
-          {/* <div>
-            AFFICHAGE DE {(currentPage - 1) * itemsPerPage} -
-            {currentPage * itemsPerPage}  PATIENT SUR UN TOTAL DE  {data.length} PATIENTS
-          </div> */}
+       
           <div className="flex items-center gap-12" aria-label="Pagination">
             <button
               onClick={() => setCurrentPage(currentPage - 1)}
