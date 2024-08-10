@@ -1,18 +1,15 @@
-import AddEmployee from '@/app/components/AddEmployee'
-import React from 'react'
+import React from "react";
 import prisma from "@/lib/db";
-import EmployeeTable from '@/app/components/EmployeeTable';
+import EmployeeTable from "@/app/components/EmployeeTable";
 
 const page = async () => {
-    const employees = await prisma.employee.findMany()
+  const employees = await prisma.employee.findMany();
 
   return (
-   <>
-      
-<EmployeeTable data={employees }/>
+    <>
+      <EmployeeTable data={employees} />
+    </>
+  );
+};
 
-   </> 
-  )
-}
-
-export default page
+export default page;

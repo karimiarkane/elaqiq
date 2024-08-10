@@ -1,9 +1,17 @@
-import React from 'react'
+import AddEmployee from "@/app/components/AddEmployeeModal";
+import React from "react";
+import prisma from "@/lib/db";
+import LeaveTable from "@/app/components/LeaveTable";
 
-const page = () => {
+const page = async () => {
+  const employees = await prisma.employee.findMany();
+  const leaves = await prisma.leave.findMany();
+
   return (
-    <div>hello from the leave managent</div>
-  )
-}
+    <>
+      <LeaveTable data={employees} leaves = {leaves}/>
+    </>
+  );
+};
 
-export default page
+export default page;

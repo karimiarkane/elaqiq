@@ -2,48 +2,45 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import AddEmployee from "./AddEmployee";
-import EditEmployee from "./EditEmployee";
-
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import AddEmployee from "./AddEmployeeModal";
+import EditEmployee from "./EditEmployeeModal";
+import { Button } from "@nextui-org/react";
 
 const EmployeeTable = ({ data }: { data: any }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredEmployees, setFilteredEmployees] = useState(data);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-
   const totalPages = Math.ceil(data.length / itemsPerPage);
- 
 
-  const [successMsg , setSuccessMsg ] = useState("")
-  const [errorMsg , setErrorMsg ] = useState("")
+  const [successMsg, setSuccessMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
-const router = useRouter()
- 
-
-
-
+  const router = useRouter();
 
   useEffect(() => {
-    const searchTerms = searchTerm.toLowerCase().split(' ').filter(term => term.trim() !== '');
-    console.log("searchTerms", searchTerms)
-    const filtered = data.filter((employee)  => {
-        const employeeFullName = `${employee.lastName.toLowerCase()} ${employee.firstName.toLowerCase()}`;
-        return searchTerms.every(term => employeeFullName.includes(term));
-   } );
-   setFilteredEmployees(filtered);
-    console.log('filtered' , filtered);
+    const searchTerms = searchTerm
+      .toLowerCase()
+      .split(" ")
+      .filter((term) => term.trim() !== "");
+    console.log("searchTerms", searchTerms);
+    const filtered = data.filter((employee) => {
+      const employeeFullName = `${employee.lastName.toLowerCase()} ${employee.firstName.toLowerCase()}`;
+      return searchTerms.every((term) => employeeFullName.includes(term));
+    });
+    setFilteredEmployees(filtered);
+    console.log("filtered", filtered);
     setCurrentPage(1); // Reset to the first page after filtering
   }, [searchTerm, data]);
-  
+
   const lastItemIndex = currentPage * itemsPerPage;
   const firstItemIndex = lastItemIndex - itemsPerPage;
   const currentItems = filteredEmployees.slice(firstItemIndex, lastItemIndex);
 
-  const hundleDeliteClick = async (id: any) => {
+  const hundleDeleteClick = async (id: any) => {
     let confirmDelete = window.confirm(
-      "tu veux vraiment supprimer ce employe ?"
+      "Voulez-vous vraiment supprimer cet employé ?"
     );
     if (confirmDelete) {
       try {
@@ -51,14 +48,16 @@ const router = useRouter()
           method: "DELETE",
         });
         const resback = await res.json();
-        if (resback.status === 200){
-window.alert("employe supprimé")
-router.refresh()
-        }else{
-            window.alert("Erreur lors de la suppression de l'employe")
+        if (resback.status === 200) {
+          window.alert(resback.message);
+          router.refresh();
+        } else {
+          window.alert(resback.message);
         }
       } catch (err) {
-        console.log("error deleting user : ", err);
+        console.error('yaaaa reb Error deleting employee catched from the front : ', err);  // log the error in your server logs for debugging purposes
+        window.alert("Une erreur est survenue. Veuillez réessayer plus tard.");
+
       }
     }
   };
@@ -67,21 +66,24 @@ router.refresh()
     <div className="max-w-screen-xl mx-auto px-4 md:px-8 py-10 ">
       <div className="items-end justify-between md:flex   ">
         <div className="max-w-lg  ">
-        <form
-            onSubmit={(e) => e.preventDefault()} 
-            className="max-w-md px-4 mx-auto mt-12">
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            className="max-w-md px-4 mx-auto mt-12"
+          >
             <div className="relative">
-            
-                <FontAwesomeIcon className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-400 left-3" icon={faMagnifyingGlass} />
-                <input
-                    type="text"
-                    placeholder="Search"
-                    value={searchTerm}
-                    className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-indigo-600"
-                    onChange={(e)=>setSearchTerm(e.target.value)}
-                />
+              <FontAwesomeIcon
+                className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-400 left-3"
+                icon={faMagnifyingGlass}
+              />
+              <input
+                type="text"
+                placeholder="Search"
+                value={searchTerm}
+                className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-indigo-600"
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
             </div>
-        </form>
+          </form>
         </div>
 
         <div className="mt-3 md:mt-0">
@@ -97,29 +99,33 @@ router.refresh()
               <th className="py-3 px-6">Age</th>
               <th className="py-3 px-6">contact</th>
               <th className="py-3 px-6">workstation</th>
+              <th className="py-3 px-6 text-center">Actions</th>
             </tr>
           </thead>
           <tbody className="text-gray-600 divide-y">
             {currentItems.map((item: any, idx: any) => (
               <tr key={idx}>
-                <td className="px-6 py-4 whitespace-nowrap">{item.firstName} </td>
-                <td className="px-6 py-4 whitespace-nowrap">{item.lastName} </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {item.firstName}{" "}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {item.lastName}{" "}
+                </td>
                 <td className="px-6 py-4 whitespace-nowrap">{item.age} </td>
                 <td className="px-6 py-4 whitespace-nowrap">{item.contact} </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {item.workstation}
                 </td>
-                <td className="text-right px-6 whitespace-nowrap">
-                
-              
-                 <EditEmployee employeeInfo={item} />
+                <td className="text-right px-6 py-4 whitespace-nowrap flex justify-evenly">
+                  <EditEmployee employeeInfo={item} />
 
-                  <button
-                    onClick={() => hundleDeliteClick(item.id)}
-                    className="py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg"
+                  <Button
+                    onClick={() => hundleDeleteClick(item.id)}
+                   color="danger" 
+
                   >
                     supprimer
-                  </button>
+                  </Button>
                 </td>
               </tr>
             ))}
@@ -153,7 +159,6 @@ router.refresh()
             </button>
           </div>
         </div>
-      
       </div>
     </div>
   );

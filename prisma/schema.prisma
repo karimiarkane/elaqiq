@@ -30,7 +30,8 @@ model Attendance {
   id         Int      @id @default(autoincrement())
   date       DateTime
   status     Status
-  employee   Employee @relation(fields: [employeeId], references: [id])
+  employee   Employee @relation(fields: [employeeId], references: [id] , onDelete: Cascade)
+
   employeeId Int
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -42,7 +43,7 @@ model Leave {
   startDate  DateTime
   endDate    DateTime
   reason     String?
-  employee   Employee @relation(fields: [employeeId], references: [id])
+  employee   Employee @relation(fields: [employeeId], references: [id] , onDelete: Cascade)
   employeeId Int
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
