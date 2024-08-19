@@ -23,7 +23,7 @@ export default function AddLeaveModal({employeId} : {employeId: any}) {
     }
   }, [isOpen]);
 
-  const handleSubmit = async  (e) => {
+  const handleSubmit = async  (e: { preventDefault: () => void; } ) => {
     e.preventDefault()
     setDisableButton(true)
     if(disableButton) return

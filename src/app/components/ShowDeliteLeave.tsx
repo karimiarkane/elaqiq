@@ -20,6 +20,7 @@ interface Leave {
 }
 
 export default function ShowDeliteLeave({ employeId, leaves }: { employeId: string, leaves: any[] }) {
+  console.log("leaves", leaves);
   const router = useRouter();
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
@@ -65,7 +66,7 @@ export default function ShowDeliteLeave({ employeId, leaves }: { employeId: stri
 
   return (
     <>
-      <Button color="primary" onPress={onOpen}>Modifier</Button>
+      <Button color="primary" onPress={onOpen}>Detailles</Button>
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
@@ -86,7 +87,7 @@ export default function ShowDeliteLeave({ employeId, leaves }: { employeId: stri
                 <ul>
                   {filteredLeaves.map((leave) => (
                     <li key={leave.id} className="flex justify-between items-center">
-                      <p>{leave.reason} ({leave.startDate.toLocaleDateString(`en-GB`)} - {leave.endDate.toLocaleDateString(`en-GB`)})</p>
+                      <p className="p-3"> {leave.startDate.toLocaleDateString(`en-GB`)} - {leave.endDate.toLocaleDateString(`en-GB`)} : <span className="font-bold">{leave.reason}</span></p>
                       <Button color="danger" onPress={() => deleteLeave(leave.id)}>
                         Delete
                       </Button>

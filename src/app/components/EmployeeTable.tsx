@@ -24,13 +24,11 @@ const EmployeeTable = ({ data }: { data: any }) => {
       .toLowerCase()
       .split(" ")
       .filter((term) => term.trim() !== "");
-    console.log("searchTerms", searchTerms);
-    const filtered = data.filter((employee) => {
+    const filtered = data.filter((employee : any) => {
       const employeeFullName = `${employee.lastName.toLowerCase()} ${employee.firstName.toLowerCase()}`;
       return searchTerms.every((term) => employeeFullName.includes(term));
     });
     setFilteredEmployees(filtered);
-    console.log("filtered", filtered);
     setCurrentPage(1); // Reset to the first page after filtering
   }, [searchTerm, data]);
 

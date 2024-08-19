@@ -5,23 +5,24 @@ import { eachDayOfInterval } from 'date-fns';
 
 
 export const DELETE = async (req: NextRequest ,   { params }: { params: { id: string } }) => {
-  console.log("on the back")
    
    try{ const { id } = params
    console.log("id", id)
     const leave = await prisma.leave.findUnique({
         where: { id: parseInt(id) },
     });
-    console.log("leave" , leave)
-    const formattedEndDate = leave ? leave.endDate :null
-    const formattedStartDate =leave ? leave.startDate: null;
+    if(!leave){
+      return NextResponse.json({ status: 404, message: "conge introuvable" });
+    }
+    const formattedEndDate =  leave.endDate 
+    const formattedStartDate = leave.startDate;
 
 console.log("formattedStartDate" , formattedStartDate)
     console.log("formattedEndDate" , formattedEndDate)
        
           // Create attendance records for each day in the leave period
           const leaveDays = eachDayOfInterval({
-            start: formattedStartDate,
+            start: formattedStartDate ,
             end: formattedEndDate,
           });
     

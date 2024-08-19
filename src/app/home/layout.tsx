@@ -1,34 +1,48 @@
-import { redirect } from 'next/dist/server/api-utils';
+'use client'
+import Image from 'next/image';
 import Link from 'next/link';
+import Header from '../components/Header';
+import { usePathname } from 'next/navigation';
+
+
 
 const Layout = ({ children } : Readonly<{
     children: React.ReactNode;
   }>) => {
-
+const currentPath = usePathname();
   const tabs = [
-    { name: 'Dashboard', path: '/' },
-    { name: 'Employee Management', path: '/employee-management' },
-    { name: 'Attendance Management', path: '/attendance-management' },
-    { name: 'Leave Management', path: '/leave-management' },
-    { name: 'Monthly Recap', path: '/monthly-recap' },
-    { name: 'Attendance Grid', path: '/attendance-grid' },
+    { name: 'Tableau de bord', path: '/' },
+    { name: 'Gestion des employés', path: '/employee-management' },
+    { name: 'Gestion des présences', path: '/attendance-management' },
+    { name: 'Gestion des congés', path: '/leave-management' },
+    { name: 'Récapitulatif mensuel', path: '/monthly-recap' },
+    { name: 'Grille de présence', path: '/attendance-grid' },
   ];
 
   return (
-    <div className="flex">
-      <div className="w-1/4 h-screen bg-gray-800 text-white">
-        <div className="p-4 text-2xl font-bold">Admin Panel</div>
+    <div className="flex ">
+      <div className="w-1/4 h-screen flex flex-col  border-r-3  pt-7 ">
+      <div className='flex justify-center w-full'>
+        <Image 
+          src='/elAkik.jpg'
+          alt='Logo'
+          width={200}
+          height={200}/>
+                    </div>
         <ul>
           {tabs.map((tab) => (
-            <li key={tab.name} >
-              <Link href={`/home${tab.path}`}>
+            <li key={tab.name}  className={`border-2 border-solid flex justify-center items-center ${currentPath === `/home${tab.path}` ? 'bg-gray-200' : ''}`}>
+              <Link href={`/home${tab.path}`} className='flex items-center w-full h-full justify-center gap-x-2 text-gray-600 p-5 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150'>
                 <p>{tab.name}</p>
               </Link>
             </li>
           ))}
         </ul>
       </div>
-      <div className="w-3/4 p-4">{children}</div>
+      <div className="w-3/4 p-4 ">
+      
+      <Header/>
+      {children}</div>
     </div>
   );
 };

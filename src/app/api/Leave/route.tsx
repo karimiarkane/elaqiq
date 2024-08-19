@@ -7,18 +7,18 @@ import { eachDayOfInterval } from 'date-fns';
 export const POST = async (req: NextRequest ) => {
    
   const { employeId, reason, endDate,startDate }= await req.json()
-  console.log("from the back")
-console.log("employeId :" ,employeId)
-console.log("reason :" ,reason)
-console.log("endDate :" ,endDate)
-console.log("startDate :" ,startDate)
+//   console.log("from the back")
+// console.log("employeId :" ,employeId)
+// console.log("reason :" ,reason)
+// console.log("endDate :" ,endDate)
+// console.log("startDate :" ,startDate)
 const formattedStartDate = new Date(startDate.year, startDate.month - 1, startDate.day);
 const formattedEndDate = new Date(endDate.year, endDate.month - 1, endDate.day);
 formattedEndDate.setHours(0,0,0,0)
 formattedStartDate.setHours(0,0,0,0)
 
-console.log("formattedStartDate :" , formattedStartDate)
-console.log("formattedEndDate :" , formattedEndDate)
+// console.log("formattedStartDate :" , formattedStartDate)
+// console.log("formattedEndDate :" , formattedEndDate)
 
 try{
     const newLeave = await prisma.leave.create({

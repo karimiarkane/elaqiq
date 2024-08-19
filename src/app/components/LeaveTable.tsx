@@ -8,7 +8,7 @@ import ShowDeliteLeave from "./ShowDeliteLeave";
 
 
 
-const LeaveTable = ({ data }: { data: any[] }, leaves: any) => {
+const LeaveTable = ({ data ,leaves }: { data: any[] , leaves : any }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredEmployees, setFilteredEmployees] = useState(data);
   const [currentPage, setCurrentPage] = useState(1);
@@ -94,6 +94,7 @@ router.refresh()
               <th className="py-3 px-6">Nom</th>
               <th className="py-3 px-6">Prenom</th>
               <th className="py-3 px-6">workstation</th>
+              <th className="py-3 px-6 text-center">Actions</th>
             </tr>
           </thead>
           <tbody className="text-gray-600 divide-y">
@@ -105,7 +106,7 @@ router.refresh()
                 <td className="px-6 py-4 whitespace-nowrap">
                   {item.workstation}
                 </td>
-                <td className="text-right px-6 whitespace-nowrap">
+                <td className="px-6 py-4 whitespace-nowrap   flex  justify-evenly">
                 
               
                  <ShowDeliteLeave employeId={item.id} leaves={leaves} />

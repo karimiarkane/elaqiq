@@ -16,12 +16,14 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@nextui-org/react": "^2.4.6",
     "@prisma/client": "^5.17.0",
+    "chart.js": "^4.4.3",
     "date-fns": "^3.6.0",
     "framer-motion": "^11.3.21",
     "next": "14.2.5",
     "next-auth": "^5.0.0-beta.20",
     "react": "^18",
     "react-aria": "^3.34.1",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18"
   },
   "devDependencies": {

@@ -88,8 +88,8 @@ const handleSubmit = async (e : any) => {
               <ModalBody>
     <div>
       <form id="myform" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="lastName">Last Name</label>
+        <div className="py-1 flex gap-x-4 items-center">
+          <label htmlFor="lastName"  className="text-gray-600 ">Last Name</label>
           <input
             type="text"
             id="lastName"
@@ -97,10 +97,12 @@ const handleSubmit = async (e : any) => {
             value={form.lastName}
             onChange={handleChange}
             required
+            className=" pr-12 pl-3 py-1.5 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+
           />
         </div>
-        <div>
-          <label htmlFor="firstName">First Name</label>
+        <div className="py-1 flex gap-x-4 items-center">
+          <label htmlFor="firstName" className="text-gray-600">First Name</label>
           <input
             type="text"
             id="firstName"
@@ -108,10 +110,12 @@ const handleSubmit = async (e : any) => {
             value={form.firstName}
             onChange={handleChange}
             required
+            className=" pr-12 pl-3 py-1.5 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+
           />
         </div>
-        <div>
-          <label htmlFor="age">Age</label>
+        <div className="py-1 flex gap-x-4 items-center">
+          <label htmlFor="age" className="text-gray-600">Age</label>
           <input
             type="number"
             id="age"
@@ -119,10 +123,12 @@ const handleSubmit = async (e : any) => {
             value={form.age}
             onChange={handleChange}
             required
+            className=" pr-12 pl-3 py-1.5 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+
           />
         </div>
-        <div>
-          <label htmlFor="contact">Contact</label>
+        <div className="py-1 flex gap-x-4 items-center">
+          <label htmlFor="contact" className="text-gray-600" >Contact</label>
           <input
             type="text"
             id="contact"
@@ -130,10 +136,12 @@ const handleSubmit = async (e : any) => {
             value={form.contact}
             onChange={handleChange}
             required
+            className=" pr-12 pl-3 py-1.5 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+
           />
         </div>
-        <div>
-          <label htmlFor="workstation">Workstation</label>
+        <div className="py-1 flex gap-x-4 items-center"> 
+          <label htmlFor="workstation" className="text-gray-600" >Workstation</label>
           <select
             id="workstation"
             name="workstation"
@@ -145,8 +153,8 @@ const handleSubmit = async (e : any) => {
           </select>
         </div>
       </form>
-      {successMsg && <p>{successMsg} </p>}
-      {errMsg && <p>{errMsg} </p>}
+      {successMsg && <p className="text-green-500">{successMsg} </p>}
+      {errMsg && <p className="text-red-500">{errMsg} </p>}
     </div>
               </ModalBody>
               <ModalFooter>
