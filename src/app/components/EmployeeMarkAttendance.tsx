@@ -29,9 +29,7 @@ const EmployeeMarkAttendance = ({ data }: { data: any }) => {
   const [date, setDate] = useState(
    getLocalDateString()
   );
-//   console.log("function return " , getLocalDateString())
-//   console.log("  parseDate(getLocalDateString())" ,   parseDate(getLocalDateString()))
-// console.log("date state ", date)
+
  
 
   const [presenceLoading, setPresenceLoading] = useState("");

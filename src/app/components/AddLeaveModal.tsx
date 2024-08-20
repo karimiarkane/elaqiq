@@ -3,12 +3,31 @@ import React, { useEffect, useState } from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
 import StartEndLeaveDate from "./StartEndLeaveDate";
 import { useRouter } from "next/navigation";
+import {
+  parseDate,
 
+} from "@internationalized/date";
 export default function AddLeaveModal({employeId} : {employeId: any}) {
   const {isOpen, onOpen, onOpenChange , onClose} = useDisclosure();
 
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const getLocalDateString = () => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(date.getDate()).padStart(2, '0');
+    return parseDate(`${year}-${month}-${day}`);
+  };
+
+
+
+
+  const [startDate, setStartDate] = useState(getLocalDateString());
+  const [endDate, setEndDate] = useState(getLocalDateString());
+
+
+
+
+
   const [reason, setReason] = useState('');
   const [disableButton , setDisableButton] = useState(false)
   const [errMsg, setErrMsg] = useState("");
@@ -51,8 +70,8 @@ if (resback.status != 200) {
   setTimeout(() => {
     onClose();
   }, 1000);
-  setEndDate("")
-  setStartDate("")
+  setEndDate(getLocalDateString())
+  setStartDate(getLocalDateString())
   setReason("")
   router.refresh();
 }

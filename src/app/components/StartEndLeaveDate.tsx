@@ -15,7 +15,7 @@ export default function StartEndLeaveDate({startDate,endDate,setEndDate,setStart
             <DateInput
             id="datedebut"
              label="jours/mois/année"
-            value={startDate ? startDate : parseDate(new Date().toISOString().split("T")[0])}
+            value={startDate }
             
               onChange={setStartDate}
               placeholderValue={new CalendarDate(1995, 11, 6)}
@@ -29,8 +29,8 @@ export default function StartEndLeaveDate({startDate,endDate,setEndDate,setStart
             <label  className="text-gray-700" htmlFor="datefin">Date Fin :</label>
             <DateInput
             id="datefin"
-             label="mois/jour/année"
-               value={endDate ? endDate : parseDate(new Date().toISOString().split("T")[0])}
+             label="jours/mois/année"
+               value={endDate}
               onChange={setEndDate}
        
               placeholderValue={new CalendarDate(1995, 11, 6)}
