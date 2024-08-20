@@ -14,8 +14,6 @@ const EmployeeTable = ({ data }: { data: any }) => {
   const itemsPerPage = 5;
   const totalPages = Math.ceil(data.length / itemsPerPage);
 
-  const [successMsg, setSuccessMsg] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
 
   const router = useRouter();
 
@@ -75,7 +73,7 @@ const EmployeeTable = ({ data }: { data: any }) => {
               />
               <input
                 type="text"
-                placeholder="Search"
+                placeholder="Rechercher un employé"
                 value={searchTerm}
                 className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-indigo-600"
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -96,7 +94,7 @@ const EmployeeTable = ({ data }: { data: any }) => {
               <th className="py-3 px-6">Prenom</th>
               <th className="py-3 px-6">Age</th>
               <th className="py-3 px-6">contact</th>
-              <th className="py-3 px-6">workstation</th>
+              <th className="py-3 px-6">Poste</th>
               <th className="py-3 px-6 text-center">Actions</th>
             </tr>
           </thead>
@@ -135,10 +133,7 @@ const EmployeeTable = ({ data }: { data: any }) => {
 
       <div className="max-w-screen-xl mx-auto mt-12 px-4 text-gray-600 md:px-8">
         <div className="hidden  text-sm md:flex justify-end">
-          {/* <div>
-            AFFICHAGE DE {(currentPage - 1) * itemsPerPage} -
-            {currentPage * itemsPerPage}  PATIENT SUR UN TOTAL DE  {data.length} PATIENTS
-          </div> */}
+     
           <div className="flex items-center gap-12" aria-label="Pagination">
             <button
               onClick={() => setCurrentPage(currentPage - 1)}

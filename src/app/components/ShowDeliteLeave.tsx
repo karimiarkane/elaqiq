@@ -80,7 +80,7 @@ export default function ShowDeliteLeave({ employeId, leaves }: { employeId: stri
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col items-center gap-1">
-                All leaves
+                Tous les congés
               </ModalHeader>
               <ModalBody>
               
@@ -89,7 +89,7 @@ export default function ShowDeliteLeave({ employeId, leaves }: { employeId: stri
                     <li key={leave.id} className="flex justify-between items-center">
                       <p className="p-3"> {leave.startDate.toLocaleDateString(`en-GB`)} - {leave.endDate.toLocaleDateString(`en-GB`)} : <span className="font-bold">{leave.reason}</span></p>
                       <Button color="danger" onPress={() => deleteLeave(leave.id)}>
-                        Delete
+                        Supprimer
                       </Button>
                     </li>
                   ))}

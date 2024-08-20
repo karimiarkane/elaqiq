@@ -53,7 +53,7 @@ const getStatistics = (data : any) => {
               />
               <input
                 type="text"
-                placeholder="Search"
+                placeholder="Rechercher un employé"
                 value={searchTerm}
                 className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-indigo-600"
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -72,7 +72,7 @@ const getStatistics = (data : any) => {
               <th className="py-3 px-6">Prenom</th>
               <th className="py-3 px-6">Age</th>
               <th className="py-3 px-6">contact</th>
-              <th className="py-3 px-6">workstation</th>
+              <th className="py-3 px-6">Poste</th>
               <th className="py-3 px-6 text-center">Presence</th>
               <th className="py-3 px-6 text-center">Absence</th>
               <th className="py-3 px-6 text-center">Congé</th>

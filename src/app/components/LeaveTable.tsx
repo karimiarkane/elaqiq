@@ -28,13 +28,11 @@ const router = useRouter()
 
   useEffect(() => {
     const searchTerms = searchTerm.toLowerCase().split(' ').filter(term => term.trim() !== '');
-    console.log("searchTerms", searchTerms)
     const filtered = data.filter((employee)  => {
         const employeeFullName = `${employee.lastName.toLowerCase()} ${employee.firstName.toLowerCase()}`;
         return searchTerms.every(term => employeeFullName.includes(term));
    } );
    setFilteredEmployees(filtered);
-    console.log('filtered' , filtered);
     setCurrentPage(1); // Reset to the first page after filtering
   }, [searchTerm, data]);
   
@@ -76,7 +74,7 @@ router.refresh()
                 <FontAwesomeIcon className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-400 left-3" icon={faMagnifyingGlass} />
                 <input
                     type="text"
-                    placeholder="Search"
+                    placeholder="Rechercher un employé"
                     value={searchTerm}
                     className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-indigo-600"
                     onChange={(e)=>setSearchTerm(e.target.value)}
@@ -93,7 +91,7 @@ router.refresh()
             <tr>
               <th className="py-3 px-6">Nom</th>
               <th className="py-3 px-6">Prenom</th>
-              <th className="py-3 px-6">workstation</th>
+              <th className="py-3 px-6">Poste</th>
               <th className="py-3 px-6 text-center">Actions</th>
             </tr>
           </thead>

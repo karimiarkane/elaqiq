@@ -1,5 +1,5 @@
 import React from "react";
-export const CalendarIcon = (props) => (
+export const CalendarIcon = (props : any) => (
   <svg
     aria-hidden="true"
     fill="none"

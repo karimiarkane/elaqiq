@@ -10,12 +10,13 @@ export default function StartEndLeaveDate({startDate,endDate,setEndDate,setStart
     <div className="flex w-full flex-col gap-4">
       <div className="flex w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
       <I18nProvider locale="en-GB">
-      <div>
-            <label htmlFor="datedebut"> date debut</label>
+      <div  className="m-3">
+            <label className="text-gray-700" htmlFor="datedebut"> Date Debut :</label>
             <DateInput
             id="datedebut"
              label="jours/mois/année"
             value={startDate ? startDate : parseDate(new Date().toISOString().split("T")[0])}
+            
               onChange={setStartDate}
               placeholderValue={new CalendarDate(1995, 11, 6)}
               startContent={
@@ -24,14 +25,14 @@ export default function StartEndLeaveDate({startDate,endDate,setEndDate,setStart
             />
         </div>
        
-        <div>
-            <label htmlFor="datefin">date fin</label>
+        <div className="m-3">
+            <label  className="text-gray-700" htmlFor="datefin">Date Fin :</label>
             <DateInput
             id="datefin"
              label="mois/jour/année"
                value={endDate ? endDate : parseDate(new Date().toISOString().split("T")[0])}
               onChange={setEndDate}
-            
+       
               placeholderValue={new CalendarDate(1995, 11, 6)}
               endContent={
                <CalendarIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />

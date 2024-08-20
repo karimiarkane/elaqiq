@@ -67,7 +67,7 @@ if (resback.status != 200) {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">ajout du conge</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">Ajouter un congé</ModalHeader>
               <ModalBody>
               <form id="myform" onSubmit={handleSubmit}>
      
@@ -84,10 +84,12 @@ if (resback.status != 200) {
           </div>
         
         </form>
+        {errMsg && <p className="text-red-500">{errMsg}</p>}
+        {successMsg && <p className="text-green-500">{successMsg}</p>}
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
-                  Close
+                  Annuler
                 </Button>
                 <button form="myform" type="submit" disabled={disableButton}  className="px-4 py-2 text-blue-700 rounded-2xlP   duration-150 hover:text-white hover:bg-indigo-500 active:bg-indigo-700">
                   Ajouter

@@ -17,29 +17,29 @@ const AttendanceGrid =  ({attendance, employees}: {attendance: any, employees: a
 
 
 
-  // const [searchTerm, setSearchTerm] = useState("");
-  // const [filteredEmployees, setFilteredEmployees] = useState(employees);
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const itemsPerPage = 5;
-  // const totalPages = Math.ceil(employees.length / itemsPerPage);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredEmployees, setFilteredEmployees] = useState(employees);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  const totalPages = Math.ceil(employees.length / itemsPerPage);
 
 
-  // useEffect(() => {
-  //   const searchTerms = searchTerm
-  //     .toLowerCase()
-  //     .split(" ")
-  //     .filter((term) => term.trim() !== "");
-  //   const filtered = employees.filter((employee : any) => {
-  //     const employeeFullName = `${employee.lastName.toLowerCase()} ${employee.firstName.toLowerCase()}`;
-  //     return searchTerms.every((term) => employeeFullName.includes(term));
-  //   });
-  //   setFilteredEmployees(filtered);
-  //   setCurrentPage(1); // Reset to the first page after filtering
-  // }, [searchTerm, employees]);
+  useEffect(() => {
+    const searchTerms = searchTerm
+      .toLowerCase()
+      .split(" ")
+      .filter((term) => term.trim() !== "");
+    const filtered = employees.filter((employee : any) => {
+      const employeeFullName = `${employee.lastName.toLowerCase()} ${employee.firstName.toLowerCase()}`;
+      return searchTerms.every((term) => employeeFullName.includes(term));
+    });
+    setFilteredEmployees(filtered);
+    setCurrentPage(1); // Reset to the first page after filtering
+  }, [searchTerm, employees]);
 
-  // const lastItemIndex = currentPage * itemsPerPage;
-  // const firstItemIndex = lastItemIndex - itemsPerPage;
-  // const currentItems = filteredEmployees.slice(firstItemIndex, lastItemIndex);
+  const lastItemIndex = currentPage * itemsPerPage;
+  const firstItemIndex = lastItemIndex - itemsPerPage;
+  const currentItems = filteredEmployees.slice(firstItemIndex, lastItemIndex);
 
 
 
@@ -80,14 +80,12 @@ const AttendanceGrid =  ({attendance, employees}: {attendance: any, employees: a
 
   return (
     <div className="max-w-screen-xl mx-auto px-4 md:px-8 py-10">
-       <div className="mb-4">
-        <h2 className="text-lg font-medium text-gray-700">
-          Attendance for {currentDate.toLocaleString('fr-FR', { month: 'long' })} {currentYear}
-        </h2>
-        {/* <div className="max-w-lg  ">
+       <div className="mb-4 flex justify-between items-center ">
+       
+        <div className="  ">
           <form
             onSubmit={(e) => e.preventDefault()}
-            className="max-w-md px-4 mx-auto mt-12"
+           
           >
             <div className="relative">
               <FontAwesomeIcon
@@ -96,14 +94,17 @@ const AttendanceGrid =  ({attendance, employees}: {attendance: any, employees: a
               />
               <input
                 type="text"
-                placeholder="Search"
+                placeholder="Rechercher un employé"
                 value={searchTerm}
                 className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-indigo-600"
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
           </form>
-        </div> */}
+        </div>
+        <h2 className="text-lg font-medium text-gray-700">
+          Attendance de {currentDate.toLocaleString('fr-FR', { month: 'long' })} {currentYear}
+        </h2>
 
       </div>
       <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
@@ -117,7 +118,7 @@ const AttendanceGrid =  ({attendance, employees}: {attendance: any, employees: a
             </tr>
           </thead>
           <tbody className="text-gray-600 divide-y">
-            {employees.map((employee : any) => (
+            {currentItems.map((employee : any) => (
 
                 
               <tr key={employee.id}>
@@ -144,6 +145,29 @@ const AttendanceGrid =  ({attendance, employees}: {attendance: any, employees: a
             ))}
           </tbody>
         </table>
+      
+      </div>
+      <div className="max-w-screen-xl mx-auto mt-12 px-4 text-gray-600 md:px-8">
+        <div className="hidden  text-sm md:flex justify-end">
+     
+          <div className="flex items-center gap-12" aria-label="Pagination">
+            <button
+              onClick={() => setCurrentPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="cursor-pointer hover:text-indigo-600"
+            >
+              précédent
+            </button>
+
+            <button
+              onClick={() => setCurrentPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="cursor-pointer hover:text-indigo-600"
+            >
+              suivant
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

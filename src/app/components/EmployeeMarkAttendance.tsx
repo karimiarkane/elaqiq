@@ -109,7 +109,7 @@ const EmployeeMarkAttendance = ({ data }: { data: any }) => {
               />
               <input
                 type="text"
-                placeholder="Search"
+                placeholder="Rechercher un employé"
                 value={searchTerm}
                 className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-indigo-600"
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -124,7 +124,7 @@ const EmployeeMarkAttendance = ({ data }: { data: any }) => {
             <tr>
               <th className="py-3 px-6">Nom</th>
               <th className="py-3 px-6">Prenom</th>
-              <th className="py-3 px-6">workstation</th>
+              <th className="py-3 px-6">Poste</th>
               <th className="py-3 px-6">Date</th>
               <th className="py-3 px-6 text-center">Actions</th>
             </tr>

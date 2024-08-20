@@ -1,6 +1,7 @@
 import RecapTable from '@/app/components/RecapTable'
 import prisma from '@/lib/db'
 import React from 'react'
+export const dynamic = 'force-dynamic'
 
 const page = async () => {
 //  const Employees = await  prisma.employee.findMany()

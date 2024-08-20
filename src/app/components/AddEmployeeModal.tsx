@@ -79,7 +79,7 @@ const handleSubmit = async (e : any) => {
   }
   return (
     <>
-      <Button onPress={onOpen} color="primary">Ajouter un Employé</Button>
+      <Button className="p-6" onPress={onOpen} color="primary">Ajouter un Employé</Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
