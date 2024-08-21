@@ -11,6 +11,9 @@ const RecapTable = ({ data }: { data: any }) => {
   const itemsPerPage = 5;
   const totalPages = Math.ceil(data.length / itemsPerPage);
 
+  const [currentDate, setCurrentDate] = useState(new Date()); 
+  const currentYear = currentDate.getFullYear();
+
   useEffect(() => {
     const searchTerms = searchTerm
       .toLowerCase()
@@ -40,7 +43,7 @@ const getStatistics = (data : any) => {
 
   return (
     <div className="max-w-screen-xl mx-auto px-4 md:px-8 py-10 ">
-      <div className="items-end justify-between md:flex   ">
+      <div className="items-end justify-between md:flex  mb-4  ">
         <div className="max-w-lg  ">
           <form
             onSubmit={(e) => e.preventDefault()}
@@ -62,6 +65,10 @@ const getStatistics = (data : any) => {
           </form>
         </div>
 
+
+ <h2 className="text-lg font-medium text-gray-700">
+          Recapitulatif de {currentDate.toLocaleString('fr-FR', { month: 'long' })} {currentYear}
+        </h2>
       
       </div>
       <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">

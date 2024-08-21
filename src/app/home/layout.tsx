@@ -15,8 +15,8 @@ const currentPath = usePathname();
     { name: 'Gestion des employés', path: '/employee-management' },
     { name: 'Gestion des présences', path: '/attendance-management' },
     { name: 'Gestion des congés', path: '/leave-management' },
-    { name: 'Récapitulatif mensuel', path: '/monthly-recap' },
     { name: 'Grille de présence', path: '/attendance-grid' },
+    { name: 'Récapitulatif mensuel', path: '/monthly-recap' },
   ];
 
   return (
