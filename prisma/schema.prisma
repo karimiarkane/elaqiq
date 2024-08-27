@@ -56,8 +56,13 @@ model Admin {
 
 
 enum Workstation {
-  deleguation
-  vente
+  Sales
+  Delegue
+  DirecteurFinancier
+  Superviseur
+  Receptionist
+  FemmeDeMenage
+  Billetterie
 }
 
 enum Status {

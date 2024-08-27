@@ -16,13 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
     
-      <body >
+      <body>
       <NextUIProvider>
         {children}
         </NextUIProvider>
         </body>
-    
-     
     </html>
   );
 }

@@ -154,8 +154,13 @@ export default function EditEmployee({employeeInfo}: { employeeInfo: any }) {
             value={form.workstation}
             onChange={handleChange}
           >
-            <option value="deleguation">DELEGUE</option>
-            <option value="vente">vente</option>
+             <option value="Sales">Sales</option>
+            <option value="Delegue">Delegue</option>
+            <option value="DirecteurFinancier">Directeur Financier</option>
+            <option value="Superviseur">Superviseur</option>
+            <option value="Receptionist">Receptionist</option>
+            <option value="Billetterie">Billetterie</option>
+            <option value="FemmeDeMenage">Femme de Menage</option>
           </select>
         </div>
       </form>

@@ -1,15 +1,13 @@
 
-import Login from "./components/Login"
-import { auth } from "./auth";
+
 import { redirect } from "next/navigation";
 
 const Auth =async () => {
-  const session = await auth()
-if(session){
+// if(session){
     redirect("/home")
-}
+// }
   return (
- <Login/>
+ <p>c</p>
   );
 };
 

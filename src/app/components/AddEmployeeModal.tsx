@@ -89,7 +89,7 @@ const handleSubmit = async (e : any) => {
     <div>
       <form id="myform" onSubmit={handleSubmit}>
         <div className="py-1 flex gap-x-4 items-center">
-          <label htmlFor="lastName"  className="text-gray-600 ">Last Name</label>
+          <label htmlFor="lastName"  className="text-gray-600 ">Nom : </label>
           <input
             type="text"
             id="lastName"
@@ -102,7 +102,7 @@ const handleSubmit = async (e : any) => {
           />
         </div>
         <div className="py-1 flex gap-x-4 items-center">
-          <label htmlFor="firstName" className="text-gray-600">First Name</label>
+          <label htmlFor="firstName" className="text-gray-600">Prenom :</label>
           <input
             type="text"
             id="firstName"
@@ -115,7 +115,7 @@ const handleSubmit = async (e : any) => {
           />
         </div>
         <div className="py-1 flex gap-x-4 items-center">
-          <label htmlFor="age" className="text-gray-600">Age</label>
+          <label htmlFor="age" className="text-gray-600">Age :</label>
           <input
             type="number"
             id="age"
@@ -128,7 +128,7 @@ const handleSubmit = async (e : any) => {
           />
         </div>
         <div className="py-1 flex gap-x-4 items-center">
-          <label htmlFor="contact" className="text-gray-600" >Contact</label>
+          <label htmlFor="contact" className="text-gray-600" >Contact :</label>
           <input
             type="text"
             id="contact"
@@ -141,15 +141,20 @@ const handleSubmit = async (e : any) => {
           />
         </div>
         <div className="py-1 flex gap-x-4 items-center"> 
-          <label htmlFor="workstation" className="text-gray-600" >Workstation</label>
+          <label htmlFor="workstation" className="text-gray-600" >Poste :</label>
           <select
             id="workstation"
             name="workstation"
             value={form.workstation}
             onChange={handleChange}
           >
-            <option value="deleguation">DELEGUE</option>
-            <option value="vente">vente</option>
+            <option value="Sales">Sales</option>
+            <option value="Delegue">Delegue</option>
+            <option value="DirecteurFinancier">Directeur Financier</option>
+            <option value="Superviseur">Superviseur</option>
+            <option value="Receptionist">Receptionist</option>
+            <option value="Billetterie">Billetterie</option>
+            <option value="FemmeDeMenage">Femme de Menage</option>
           </select>
         </div>
       </form>

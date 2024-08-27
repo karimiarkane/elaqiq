@@ -4,19 +4,11 @@ import React from 'react'
 export const dynamic = 'force-dynamic'
 
 const page = async () => {
-//  const Employees = await  prisma.employee.findMany()
-//  const Attendance = await prisma.attendance.findMany()
-const now = new Date()
+
+
 const data = await prisma.employee.findMany({
   include :{
-    attendance :{
-      where :{
-        date : {
-          gte : new Date(now.getFullYear() , now.getMonth() , 1),
-          lte : new Date(now.getFullYear() , now.getMonth()  +1 , 0)
-        }
-      }
-    }
+    attendance :{}
   }
 })
   return (

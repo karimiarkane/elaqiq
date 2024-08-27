@@ -22,12 +22,15 @@ const currentPath = usePathname();
   return (
     <div className="flex ">
       <div className="w-1/4 h-screen flex flex-col  border-r-3  pt-7 ">
-      <div className='flex justify-center w-full'>
+      <div className='flex justify-center w-full '>
         <Image 
           src='/elAkik.jpg'
           alt='Logo'
           width={200}
-          height={200}/>
+          height={200}
+          // className=' bg-[#FFF2DF]'
+          />
+
                     </div>
         <ul>
           {tabs.map((tab) => (
