@@ -4,9 +4,10 @@ import { NextRequest, NextResponse } from 'next/server'
 
 
 export const POST = async (req: NextRequest ) => {
+  console.log("we are in the funciton to create new employee")
    
     const { lastName, firstName, age, contact, workstation } = await req.json()
-    console.log("from the back")
+    console.log("from the back info to create the new employee")
 console.log("lastname :" ,lastName)
 console.log("firstname :" ,firstName)
 console.log("age :" ,age)
@@ -26,13 +27,13 @@ console.log("workstation :" ,workstation)
       })
       return NextResponse.json({
         status : 200,
-        message : "employee created"
+        message : "employé creé avec succé"
       })
     } catch (error) {
-        console.log("err", error)
+        console.log("err creating new employee", error)
         return NextResponse.json({
             status : 400,
-            message : "error en creation"
+            message : "une erreur interne au serveur c'est produite"
           })    }
   } 
 

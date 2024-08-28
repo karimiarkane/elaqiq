@@ -53,14 +53,21 @@ export default function ShowDeliteLeave({ employeId, leaves }: { employeId: stri
       const response = await fetch(`/api/Leave/${leaveId}`, {
         method: "DELETE",
       });
-      if (response.ok) {
+      const resback = await response.json();
+      if (resback.status === 200) {
         setFilteredLeaves(filteredLeaves.filter((leave) => leave.id !== leaveId));
-        setSuccessMsg("Leave deleted successfully");
+        setSuccessMsg(resback.message);
+        router.refresh()
+        setTimeout(() => {
+          onClose();
+        }, 1000);
+        
+
       } else {
-        setErrMsg("Failed to delete leave");
+        setErrMsg(resback.message);
       }
     } catch (error) {
-      setErrMsg("Failed to delete leave");
+      setErrMsg("Erreur interne du serveur");
     }
   };
 
@@ -94,6 +101,8 @@ export default function ShowDeliteLeave({ employeId, leaves }: { employeId: stri
                     </li>
                   ))}
                 </ul>
+                {successMsg && <p className="text-green-500">{successMsg}</p>}
+                {errMsg && <p className="text-red-500">{errMsg}</p>}
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>

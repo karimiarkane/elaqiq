@@ -91,7 +91,10 @@ router.refresh()
             <tr>
               <th className="py-3 px-6">Nom</th>
               <th className="py-3 px-6">Prenom</th>
+              <th className="py-3 px-6">Age</th>
+
               <th className="py-3 px-6">Poste</th>
+              <th className="py-3 px-6">Contact</th>
               <th className="py-3 px-6 text-center">Actions</th>
             </tr>
           </thead>
@@ -100,10 +103,18 @@ router.refresh()
               <tr key={idx}>
                 <td className="px-6 py-4 whitespace-nowrap">{item.firstName} </td>
                 <td className="px-6 py-4 whitespace-nowrap">{item.lastName} </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {item.age}
+                </td>
 
                 <td className="px-6 py-4 whitespace-nowrap">
                   {item.workstation}
                 </td>
+
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {item.contact}
+                </td>
+              
                 <td className="px-6 py-4 whitespace-nowrap   flex  justify-evenly">
                 
               

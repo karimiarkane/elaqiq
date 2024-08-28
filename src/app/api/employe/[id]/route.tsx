@@ -8,9 +8,12 @@ export async function PUT(
     request: NextRequest,
     { params }: { params: { id: string } }
   ) {
+    console.log("we are in the function to update the employee info ")
     try {
       const { id } = params;
+      console.log("the id of the employee to update ", id)
       const formDataToStore = await request.json();
+      console.log("data to store after update", formDataToStore)
       const updatedEmployee = await prisma.employee.update({
         where: { id: parseInt(id) },
         data: formDataToStore,

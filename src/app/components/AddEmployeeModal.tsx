@@ -21,7 +21,7 @@ const router = useRouter()
     firstName: '',
     age: '',
     contact: '',
-    workstation: 'deleguation', // Default value
+    workstation: 'Sales', // Default value
   })
 
   const handleChange = (e : any) => {

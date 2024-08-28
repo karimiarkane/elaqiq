@@ -7,7 +7,7 @@ import { eachDayOfInterval } from 'date-fns';
 export const POST = async (req: NextRequest ) => {
    
   const { employeId, reason, endDate,startDate }= await req.json()
-  console.log("from the back")
+  console.log("from the back the leave info to create")
 console.log("employeId :" ,employeId)
 console.log("reason :" ,reason)
 console.log("endDate :" ,endDate)
@@ -37,17 +37,17 @@ try{
       });
 
       for (const date of leaveDays) {
-        console.log("leave day : ", date);
+        console.log("leave day  (one attendance): ", date);
         await prisma.attendance.upsert({
           where: { employeeId_date: { employeeId : employeId, date } },
           update: { status: 'conge' },
           create: { employeeId : employeId, date, status: 'conge' },
         });
 }
-return NextResponse.json({status : 200 , message : "attendance created"})
+return NextResponse.json({status : 200 , message : "congé creé avec succés"})
 
 }catch (error) {
-  console.error('Error creating attendancd : ', error);  // log the error in your server logs for debugging purposes
+  console.error('Error creating leace : ', error);  // log the error in your server logs for debugging purposes
 
 return NextResponse.json({ message: 'Erreur interne du serveur', status :500 });
 }

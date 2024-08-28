@@ -19,7 +19,7 @@ const AttendanceGrid = ({ attendance, employees }: { attendance: any, employees:
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredEmployees, setFilteredEmployees] = useState(employees);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 6;
   const totalPages = Math.ceil(employees.length / itemsPerPage);
 
   useEffect(() => {

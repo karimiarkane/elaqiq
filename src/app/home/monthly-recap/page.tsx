@@ -11,6 +11,8 @@ const data = await prisma.employee.findMany({
     attendance :{}
   }
 })
+console.log("employees  data to pass to the RecapTable component" , data)
+
   return (
    <RecapTable data ={data}/>
   )
